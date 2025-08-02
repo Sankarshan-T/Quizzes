@@ -1,0 +1,137 @@
+<html>
+    <head>
+        <title>Quizzes</title>
+        <style>
+            .header {
+                background-color: rgb(0, 12, 103);
+                padding: 30px;
+                text-align: left;
+                margin-left: 0px;
+                display: flex;
+                align-items: center;     
+                justify-content: space-between;
+            }
+
+            .rightLink {
+                text-decoration: none;
+                font-size: 20px;
+                color: rgb(255, 255, 255);
+                font-family: Arial, sans-serif;
+            }
+
+            .rightLink:hover {
+                color: rgb(157, 148, 255);
+            }
+
+            .home {
+                text-decoration: none;
+                font-size: 30px;
+                color: rgb(255, 255, 255);
+                font-family: Arial, sans-serif;
+            }
+            
+            .home:hover {
+                color: rgb(157, 148, 255);
+            }
+
+            .column {
+                float: left;
+                max-width: 250px;
+                width: 33.33%;
+                padding-top: 30px;
+                padding-left: 19px;
+                margin-right: 90px;
+                text-align: center;
+            }
+
+            .row::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+
+            
+            .column:last-child {
+                margin-right: 0;
+            }
+
+            .img {
+                border-radius: 20px;
+                border: 2px solid black;
+            }
+
+            .qbtn {
+                background-color: rgb(0, 60, 79);
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                margin-top: 10px;
+                display: inline-block;
+            }
+        </style>
+    </head>        
+
+    <body style="border: 2px solid rgb(0, 60, 79); padding-bottom: 15px;">  
+        
+        <header class="header">
+            <a class="home" href="Home page.html">QUIZZES</a>
+            <a class="rightLink" href="About.html">ABOUT</a>
+        </header>
+
+        <div class="row">
+            <div class="column">
+                <img class="img" src="math.jpg" alt="math" style="width:250px; height:250px">
+                <a href="MatStart.html">
+                    <button class="qbtn">Math Quiz</button>
+                </a>
+            </div>
+            <div class="column">
+                <img class="img" src="gk.png" alt="gk" style="width:250px; height:250px">
+                <a href="GKstart.html">
+                    <button class="qbtn">General Knowledge Quiz</button>
+                </a>
+            </div>
+            <div class="column">
+                <img class="img" src="Planet.jpeg" alt="Planets" style="width:250px; height:250px">
+                <a href="PlnStart.html">
+                    <button class="qbtn">Planets Quiz</button>
+                </a>
+            </div>
+            <div class="column">
+                <img class="img" src="geography.jpg" alt="geo" style="width:250px; height:250px">
+                <a href="GeoStart.html">
+                    <button class="qbtn">Geography Quiz</button>
+                </a>
+            </div>
+            <div class="column">
+                <img class="img" src="auto.jpg" alt="Automobile" style="width:250px; height:250px">
+                <a href="AutoStart.html">
+                    <button class="qbtn">Automobile Quiz</button>
+                </a>
+            </div>
+            <div class="column">
+                <img class="img" src="cube.jpg" alt="cube" style="width:250px; height:250px">
+                <a href="CubeStart.html">
+                    <button class="qbtn">Cubing Quiz</button>
+                </a>
+            </div>
+            <div class="column">
+                <img class="img" src="sports.png" alt="sports" style="width:250px; height:250px">
+                <a href="SportsStart.html">
+                    <button class="qbtn">Sports Quiz</button>
+                </a>
+            </div>
+            <div class="column">
+                <img class="img" src="tech.jpeg" alt="tech" style="width:250px; height:250px">
+                <a href="TechStart.html">
+                    <button class="qbtn">Technology Quiz</button>
+                </a>
+            </div>
+        </div>
+
+        </div>      
+    </body>
+</html>

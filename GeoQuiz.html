@@ -1,0 +1,273 @@
+<html>
+    <head>
+        <style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.h1 {
+    font-size: 2em;
+    color: rgb(36, 127, 255);
+    margin-bottom: 20px;
+    font-family: 'Comic Sans MS', 'Arial';
+}
+
+.home-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    text-decoration: none;
+}
+
+.home-btn button {
+    background-color: rgb(105, 1, 95);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.quiz-container {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 600px;
+    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;    
+}
+
+.question {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.option {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.option:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.timer {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #ff5722;
+}
+
+.result {
+    font-size: 1.5em;
+    color: #4caf50;
+    display: none;
+}
+
+.restart-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    align-content: center;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 0px;
+    display: none;
+}
+
+.restart-btn:hover {
+    background-color: #0056b3;
+}
+
+.home-btn-inline {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.home-btn-end {
+    background-color: rgb(105, 1, 95);
+    color: #fff;
+    border: none;
+    align-content: center;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 0px;
+    display: none;
+}
+
+.end-btn-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.home-btn-end:hover {
+    background-color: #7a026e;
+}
+
+.home-btn-inline .restart-btn {
+    background-color: rgb(105, 1, 95);
+}
+
+.home-btn-inline .restart-btn:hover {
+    background-color: #7a026e;
+}
+
+
+        </style>
+    </head>
+
+
+    <body>
+        <a class="home-btn" href="Home page.html">
+            <button>Home</button>
+        </a>
+        <h1 class="h1">GEOGRAPHY QUIZ</h1>
+
+        <div class="quiz-container">
+            <div class="timer">Time Left: <span id="time">30</span>s</div>
+            <div class="question">Question will appear here</div>
+            <div class="options"></div>
+            <div class="result">Congrats! You scored <span id="score">0</span></div>
+            <div class="end-btn-row">
+                <button class="restart-btn">Restart Quiz</button>
+                <button class="home-btn-end" onclick="window.location.href='Home page.html'">Home</button>
+            </div>
+            
+        </div>
+    <script>
+        const quizData =
+            [{
+                question: "Which is the largest continent by area?",
+                options: ["Asia", "Africa", "North America", "Antarctica"],
+                answer: "Asia"
+            },
+            {
+                question: "What is the capital of Canada?",
+                options: ["Toronto", "Ottawa", "Vancouver", "Montreal"],
+                answer: "Ottawa"
+            },
+            {
+                question: "Which ocean is the largest in the world?",
+                options: ["Arctic", "Atlantic", "Indian", "Pacific"],
+                answer: "Pacific"
+            },
+            {
+                question: "In which city is the Golden Gate Bridge located?",
+                options: ["Delhi", "Moscow", "Washington DC", "San Francisco"],
+                answer: "San Francisco"
+            },
+            {
+                question: "Which country is the smallest by area in the world?",
+                options: ["Monaco", "Vatican City", "Nauru", "Tuvalu"],
+                answer: "Vatican City"
+            }];
+        
+        
+
+        let currentQuestion = 0;
+        let score = 0;
+        let timeLeft = 30;
+        let timeInterval;
+        const timerE1 = document.getElementById('time');
+        const questionE1 = document.querySelector('.question');
+        const optionsE1 =  document.querySelector('.options');
+        const resultE1 = document.querySelector('.result');
+        const scoreE1 = document.getElementById('score');
+        const restartBtn = document.querySelector('.restart-btn');
+
+        function loadQuestion() {
+            if (currentQuestion >= quizData.length) {
+                endQuiz();
+                return;
+            }
+
+        clearInterval(timeInterval);
+        timeLeft = 30;
+        timerE1.textContent = timeLeft;
+        startTimer();
+        const currentQuiz = quizData[currentQuestion];
+        questionE1.textContent = currentQuiz.question;
+        optionsE1.innerHTML = '';
+        currentQuiz.options.forEach(option => {
+            const button = document.createElement('button');
+            button.classList.add('option');
+            button.textContent = option;
+            button.onclick = () => checkAnswer(option);
+            optionsE1.appendChild(button);
+        });
+        }
+
+        function checkAnswer(selectedOption) {
+            if (selectedOption === quizData[currentQuestion].answer) {
+                score ++;
+            }
+            currentQuestion ++;
+            loadQuestion();
+        }
+
+        function startTimer() {
+            timeInterval = setInterval(() => {
+                timeLeft--;
+                timerE1.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timeInterval);
+                    endQuiz();
+                }
+            }, 1000);
+        }
+
+        function endQuiz() {
+            clearInterval(timeInterval);
+            questionE1.style.display = 'none';
+            optionsE1.style.display = 'none';
+            resultE1.style.display = 'block';
+            scoreE1.textContent = score + " / 5 correct!";
+            restartBtn.style.display = 'block';
+            document.querySelector('.home-btn-end').style.display = 'inline-block';
+        }
+
+        restartBtn.addEventListener('click', () => {
+            // Reset variables
+            currentQuestion = 0;
+            score = 0;
+            timeLeft = 30;
+            timerE1.textContent = timeLeft;
+            questionE1.style.display = 'block';
+            optionsE1.style.display = 'flex';
+            resultE1.style.display = 'none';
+            restartBtn.style.display = 'none';
+            document.querySelector('.home-btn-end').style.display = 'none';
+            loadQuestion();
+        });
+loadQuestion();
+    </script>
+    </body>
+</html>
